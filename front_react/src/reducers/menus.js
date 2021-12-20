@@ -4,7 +4,7 @@ import { leftSideMenus } from '../constant/menus'
 // 액션이름 앞에 파일 이름을 넣습니다.
 export const CHOICE = "CHOICE/MENU";
 
-export const choiceMenu = (index) => ({ type: CHOICE, index })
+export const choiceMenus = (index) => ({ type: CHOICE, index })
 
 
 const initState = {

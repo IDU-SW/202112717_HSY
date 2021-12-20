@@ -19,7 +19,6 @@ export const Markets = () => {
     return (
 
         <div className = 'Markets'>
-
             <Table responsive>
                 <thead>
                     <tr>
