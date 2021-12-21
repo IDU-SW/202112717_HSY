@@ -15,7 +15,6 @@ export const LeftSideBar = () => {
             {
                 menus.filter(menu => menu.parentIndex === -1)
                      .map( baseMenu => {
-                         console.log(baseMenu)
                          if ( baseMenu.shape === 'NavDropdown' ){
                             
                             return (
@@ -37,6 +36,9 @@ export const LeftSideBar = () => {
                                     {baseMenu.title}
                                 </Nav.Link>
                              )
+                         } else {
+
+                            return ''
                          }
                      })
                 

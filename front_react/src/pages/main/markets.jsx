@@ -1,14 +1,22 @@
+import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
+import { swapMarkets } from '../../reducers'
 
 export const Markets = () => {
 
     const { markets } = useSelector( state => state.markets )
-    // const dispatch = useDispatch()
-    // const selectMarkets = () => {
-    //     dispatch()
-    // }
+    const dispatch = useDispatch()
     
+
+    useEffect( () => {
+        
+            fetch('http://localhost:3001/markets')
+            .then(res => res.json())
+            .then(res => {
+                dispatch( swapMarkets(res) )
+            });
+    },[markets])
     const MARKET_TABLE_HEAD = [ 
         { no : 0, name : 'no' }
       , { no : 1, name : 'market' }

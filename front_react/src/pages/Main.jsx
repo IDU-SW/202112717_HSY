@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { Markets } from './main/'
+import { useSelector } from "react-redux";
+import { Markets, Candles } from './main/'
 export const Main = ( ) => {
 
     const { menus } = useSelector(state => state.menus);
@@ -9,9 +9,10 @@ export const Main = ( ) => {
         let choicedJsx
         switch ( choicedMenu.index ){
             case 3 :
-                 choicedJsx = <Markets/>
+                choicedJsx = <Markets/>
             break
             case 4 : 
+                choicedJsx = <Candles/>
             break
             case 6 : 
             break

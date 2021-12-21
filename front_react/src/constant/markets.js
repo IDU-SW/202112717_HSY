@@ -100,6 +100,7 @@ export const constantMarkets = [
 , { marketSqno : "98", market : "BTC-MTL", koreanName : "메탈", englishName : "Metal" }
 , { marketSqno : "99", market : "KRW-UPP", koreanName : "센티넬프로토콜", englishName : "Sentinel Protocol" }
 , { marketSqno : "100", market : "KRW-ELF", koreanName : "엘프", englishName : "aelf" }
+/*
 , { marketSqno : "101", market : "USDT-DOGE", koreanName : "도지코인", englishName : "Dogecoin" }        
 , { marketSqno : "102", market : "USDT-ZRX", koreanName : "제로엑스", englishName : "0x Protocol" }      
 , { marketSqno : "103", market : "USDT-RVN", koreanName : "레이븐코인", englishName : "Ravencoin" }      
@@ -265,4 +266,5 @@ export const constantMarkets = [
 , { marketSqno : "266", market : "BTC-AUDIO", koreanName : "오디우스", englishName : "Audius" }
 , { marketSqno : "267", market : "KRW-NEAR", koreanName : "니어프로토콜", englishName : "NEAR Protocol" }
 , { marketSqno : "268", market : "BTC-YGG", koreanName : "일드길드게임즈", englishName : "Yield Guild Games" }
+*/
 ]
