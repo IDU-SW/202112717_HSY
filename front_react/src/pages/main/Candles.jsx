@@ -10,10 +10,18 @@ export const Candles = () => {
     const [ unit, setUnit ] = useState(1)
     const [ to, setTo ] = useState('')
     const [ market, setMarket ] = useState('KRW-BTC')
+    const [ count, setCount ] = useState(1)
+
     const selectCandles = () => {
 
-        const REST_SERVER_URL = 'http://localhost:3001/candles'
-        const url = `${REST_SERVER_URL}/${candleKind}?market=${market}${ to ? `to=${to}` : ''}${ candleKind === 'Minute' ? `&unit=${unit}` : ''}`
+        const REST_SERVER_URL = `http://localhost:3001/candles/${candleKind}/`
+        const MARKET_URL = `?market=${market}`
+        const TO_URL = to ? `&to=${to}` : '' 
+        const COUNT_URL = `&count=${count}` 
+        const UNIT_URL = candleKind === 'Minute' ? `&${unit}` : ''
+        
+        const url = `${REST_SERVER_URL}${MARKET_URL}${UNIT_URL}${TO_URL}${COUNT_URL}`
+        console.log(`>>>>>>>>>>>.${url}`)
         fetch(url)
             .then(res => res.json())
             .then(res => setCandles(res));
@@ -26,10 +34,15 @@ export const Candles = () => {
         setUnit(1)
         setTo('')
         setMarket('KRW-BTC')
+        setCount(1)
     }
     const selectUnit = (unit) => {
 
         setUnit(unit)
+    }
+    const selectCount = (count) => {
+
+        setCount(count)
     }
     const selectMarket = (market) => {
         
@@ -59,23 +72,43 @@ export const Candles = () => {
     ]
     const CANDLE_KINDS = ['Minute', 'Day', 'Week', 'Month']
     const UNITS = [1, 3, 5, 15, 10, 30, 60, 240]
+    const COUNTS = new Array()
+    for ( let i = 1; i <= 200; i++ ){
+
+        COUNTS.push(i)
+    }
+    
     return (
 
         <div className = 'Candles'>
-            <Form.Control style={{'display':'inline', 'width':'15%'}} type="text" placeholder="searchMarket" onKeyUp = {e => filterMarkets(e.target.value) } />
-            <DropdownButton className = 'm-1' style={{'display':'inline'}} title={market}>
-                { markets.map( market => <Dropdown.Item key={market.marketSqno} onClick={ () => selectMarket(market.market)}>{market.market}({market.koreanName})</Dropdown.Item>)}
-            </DropdownButton>
+            this view is Candles({candleKind})<br/>
             <DropdownButton className = 'm-1' style={{'display':'inline'}} title={candleKind}>
                 { CANDLE_KINDS.map( candleKind => <Dropdown.Item key={candleKind} onClick={ () => selectCandleKind(candleKind)}>{candleKind}</Dropdown.Item>)}
             </DropdownButton>
-            { candleKind === 'Minute' ? 
-                <DropdownButton className = 'm-1'style={{'display':'inline'}} title={unit}>
-                    { UNITS.map( unit => <Dropdown.Item key={unit} onClick={()=>selectUnit(unit)}>{unit}</Dropdown.Item>)}
-                </DropdownButton> : ''
+            <Form.Control style={{'display':'inline', 'width':'15%'}} type="text" placeholder="searchMarket" onKeyUp = {e => filterMarkets(e.target.value) } />
+            <DropdownButton className = 'm-1' style={{'display':'inline'}} title={market}>
+                { markets.map( market => <Dropdown.Item key={market.marketSqno} onClick={ () => selectMarket(market.market)}>{market.marketSqno}{market.market}({market.koreanName})</Dropdown.Item>)}
+            </DropdownButton>
+            
+            { candleKind === 'Minute' ?
+                    <div style={{'display':'inline'}}>
+                        unit :
+                        <DropdownButton className = 'm-1'style={{'display':'inline'}} title={unit}>
+                            { UNITS.map( unit => <Dropdown.Item key={unit} onClick={()=>selectUnit(unit)}>{unit}</Dropdown.Item>)}
+                        </DropdownButton> 
+                    </div>            : ''
             }
+
+
+            
+            count :
+            <DropdownButton className = 'm-1'style={{'display':'inline'}} title={count}>
+                { COUNTS.map( count => <Dropdown.Item key={count} onClick={()=>selectCount(count)}>{count}</Dropdown.Item>)}
+            </DropdownButton> 
+            
+            
             <Button className = 'm-1' onClick = { () => {selectCandles()}}>search</Button>
-            <Button className = 'm-1 btn-success' onClick = { () => {initComponent()}}>init</Button>
+            <Button className = 'm-1 btn-success' style = {{'float' : 'right'}} onClick = { () => {initComponent()}}>init</Button>
             
             <Table responsive>
                 <thead>
@@ -90,8 +123,8 @@ export const Candles = () => {
                 <tbody>
                     {
                         candles.map( ( candle, index ) => (
-                            <tr key={index}>
-                                <td>{index}</td>
+                            <tr key={index+1}>
+                                <td>{index+1}</td>
                                 <td>{candle.market}</td>
                                 <td>{candle.candle_date_time_utc}</td>
                                 <td>{candle.candle_date_time_kst}</td>       

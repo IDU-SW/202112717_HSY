@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Markets, Candles } from './main/'
+import { Markets, Candles, Account, Buy, Sell } from './main/'
 export const Main = ( ) => {
 
     const { menus } = useSelector(state => state.menus);
@@ -15,8 +15,13 @@ export const Main = ( ) => {
                 choicedJsx = <Candles/>
             break
             case 6 : 
+                choicedJsx = <Account/>
             break
-            case 7 : 
+            case 9 : 
+                choicedJsx = <Buy/>
+            break
+            case 10 : 
+                choicedJsx = <Sell/>
             break
             default :
             break
