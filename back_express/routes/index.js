@@ -13,5 +13,6 @@ router.get( "/candles/day", quotationService.selectDayCandleByMarket )
 router.get( "/candles/week", quotationService.selectWeekCandleByMarket )
 router.get( "/candles/month", quotationService.selectMonthCandleByMarket )
 router.get( "/account", exchangeService.selectMyAccount )
+router.post( "/sell", exchangeService.doSellMarket )
 
 module.exports = router

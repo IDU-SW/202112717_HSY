@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Table } from 'react-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
 import { swapMarkets } from '../../reducers'
@@ -16,7 +16,7 @@ export const Markets = () => {
             .then(res => {
                 dispatch( swapMarkets(res) )
             });
-    },[markets])
+    },new Array())
     const MARKET_TABLE_HEAD = [ 
         { no : 0, name : 'no' }
       , { no : 1, name : 'market' }
